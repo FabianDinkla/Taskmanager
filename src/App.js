@@ -4,6 +4,8 @@ import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false)
+  const [buttonText, setButtonText] = useState('Add')
   const [tasks, setTasks] = useState(
     [
         {
@@ -44,10 +46,16 @@ function App() {
       setTasks(tasks.map((task) => task.id === id ? { ...task, reminder:!task.reminder } : task))
     }
 
+    //Show Add Task Button
+    const showButton = () => {
+      setShowAddTask(!showAddTask)
+      setButtonText(showAddTask ? 'Add' : 'Hide', false)
+    }
+
   return (
     <div className='container' >
-      <Header />
-      <AddTask onAdd={addTask}/>
+      <Header onClick={showButton} buttonText={buttonText}/>
+      {showAddTask && <AddTask onAdd={addTask}/>}
       {tasks.length > 0 ? <Tasks tasks={tasks} onToggle={toggleReminder} onDelete={deleteTask}/> : 'No tasks to show'}
     </div>
   );
