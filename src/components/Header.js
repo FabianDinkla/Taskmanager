@@ -1,14 +1,29 @@
-import React from 'react'
+import PropTypes from 'prop-types'
+import Button from './Button'
 
-const Header = () => {
+const Header = ({title}) => {
+
+    const onClick = () => {
+        console.log('Click')
+    }
+
     return (
-        <div className="container" style={headerStyle}>
-            <h1 className="site-title" style={{color:'black', fontSize:'22px', margin:'auto'}}>Task Manager</h1>
-        </div>
+        <header className='header'>
+            <h1>{title}</h1>
+            <Button text='Add' color='green' onClick={onClick}/>
+        </header>
     )
 }
 
-const headerStyle = {
+Header.defaultProps = {
+    title: 'Task Tracker',
+}
+
+Header.propTypes = {
+    title: PropTypes.string.isRequired,
+}
+
+/* const headerStyle = {
     display: 'flex',
     flexDirection:'row',
     alignItems:'center',
@@ -21,5 +36,5 @@ const headerStyle = {
     borderRadius: '5px',
     border: '2px solid black',
 };
-
+ */
 export default Header
